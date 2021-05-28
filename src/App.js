@@ -114,7 +114,7 @@ function App() {
             onChange={(e) => setInputs(e.target.value)}
             multiline={true}
             rows={10}
-            placeholder={"40.714224,-73.961452\n40.714224,-73.961452\n40.714224,-73.961452"}
+            placeholder={"40.714224 -73.961452\n40.714224 -73.961452\n40.714224 -73.961452"}
           />
 
           <h3>轉換結果</h3>
