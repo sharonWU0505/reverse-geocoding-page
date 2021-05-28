@@ -107,14 +107,14 @@ function App() {
 
         <main className="transformer">
           <TextField
-            label="輸入經緯度，多筆請換行"
+            label="輸入經緯度，多筆請換行；經在前，緯在後，中間請空格"
             type="text"
             variant="outlined"
             value={inputs}
             onChange={(e) => setInputs(e.target.value)}
             multiline={true}
             rows={10}
-            placeholder={"40.714224 -73.961452\n40.714224 -73.961452\n40.714224 -73.961452"}
+            placeholder={"121.721183 25.120552\n121.720458 25.120351\n121.720458 25.120351"}
           />
 
           <h3>轉換結果</h3>
