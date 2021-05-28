@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/reverse-geocoding-page/static/css/main.e6d14c44.chunk.css",
+    "main.js": "/reverse-geocoding-page/static/js/main.3cae640e.chunk.js",
+    "main.js.map": "/reverse-geocoding-page/static/js/main.3cae640e.chunk.js.map",
+    "runtime-main.js": "/reverse-geocoding-page/static/js/runtime-main.abbcea9c.js",
+    "runtime-main.js.map": "/reverse-geocoding-page/static/js/runtime-main.abbcea9c.js.map",
+    "static/js/2.dc45e4f8.chunk.js": "/reverse-geocoding-page/static/js/2.dc45e4f8.chunk.js",
+    "static/js/2.dc45e4f8.chunk.js.map": "/reverse-geocoding-page/static/js/2.dc45e4f8.chunk.js.map",
+    "static/js/3.5ca82122.chunk.js": "/reverse-geocoding-page/static/js/3.5ca82122.chunk.js",
+    "static/js/3.5ca82122.chunk.js.map": "/reverse-geocoding-page/static/js/3.5ca82122.chunk.js.map",
+    "index.html": "/reverse-geocoding-page/index.html",
+    "static/css/main.e6d14c44.chunk.css.map": "/reverse-geocoding-page/static/css/main.e6d14c44.chunk.css.map",
+    "static/js/2.dc45e4f8.chunk.js.LICENSE.txt": "/reverse-geocoding-page/static/js/2.dc45e4f8.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.abbcea9c.js",
+    "static/js/2.dc45e4f8.chunk.js",
+    "static/css/main.e6d14c44.chunk.css",
+    "static/js/main.3cae640e.chunk.js"
+  ]
+}
