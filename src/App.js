@@ -2,6 +2,7 @@ import "./App.css";
 import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import CONFIG from "./config";
+import DataTable from "./DataTable";
 const axios = require("axios").default;
 
 function App() {
@@ -15,8 +16,9 @@ function App() {
       .map((input) =>
         input
           .trim()
-          .split(",")
+          .split(" ")
           .map((l) => l.trim())
+          .reverse()
           .join(",")
       );
 
@@ -30,19 +32,51 @@ function App() {
 
     Promise.all(promises)
       .then((values) => {
-        setAddresses(
-          values
-            .map((value) => {
-              if (value && value.data && value.data.results && value.data.results.length) {
-                return value.data.results[0].formatted_address;
-              }
-              return "-- error --";
-            })
-            .join("\n")
-        );
+        let processed_results = new Map();
+        values.forEach((value) => {
+          const lng_lat = value.config.url
+            .split("?")[1]
+            .split("&")[0]
+            .slice(7)
+            .split(",")
+            .reverse()
+            .join(",");
+          if (value && value.data && value.data.results && value.data.results.length) {
+            const result = value.data.results[0];
+            processed_results.set(lng_lat, result.formatted_address);
+          } else {
+            processed_results.set(lng_lat, "-- error --");
+          }
+        });
+
+        setAddresses(processed_results);
       })
       .catch((e) => {
         window.alert(e);
+        setAddresses("");
+      });
+  };
+
+  const handleClear = () => {
+    setInputs("");
+    setAddresses("");
+  };
+
+  const getTableData = () => {
+    return inputs
+      .trim()
+      .split("\n")
+      .map((input) => {
+        const key = input
+          .trim()
+          .split(" ")
+          .map((l) => l.trim())
+          .join(",");
+
+        return {
+          latlng: key.split(",").join(" "),
+          address: addresses.get(`${key}`),
+        };
       });
   };
 
@@ -52,13 +86,22 @@ function App() {
         <h1>經緯度地址轉換器</h1>
 
         <section className="action__bar">
-          <p>輸入經緯度時，不必在乎 , 前後是否有空白，網站會自動處理</p>
+          <p>輸入經緯度時，經、緯之間需有空白相隔</p>
           <Button
             variant="contained"
             color="primary"
+            style={{ marginLeft: "20px" }}
             onClick={handleDecode}
             disabled={!inputs.length}>
             轉換
+          </Button>{" "}
+          |
+          <Button
+            variant="outlined"
+            color="primary"
+            style={{ marginLeft: "10px" }}
+            onClick={handleClear}>
+            清除
           </Button>
         </section>
 
@@ -70,17 +113,22 @@ function App() {
             value={inputs}
             onChange={(e) => setInputs(e.target.value)}
             multiline={true}
-            rows={25}
+            rows={10}
             placeholder={"40.714224,-73.961452\n40.714224,-73.961452\n40.714224,-73.961452"}
           />
-          <TextField
-            label="地址轉換結果"
-            type="text"
-            variant="outlined"
-            value={addresses}
-            multiline={true}
-            rows={25}
-          />
+
+          <h3>轉換結果</h3>
+          {addresses ? (
+            <DataTable
+              header={[
+                { key: "latlng", name: "經緯度" },
+                { key: "address", name: "地址" },
+              ]}
+              data={getTableData()}
+            />
+          ) : (
+            <p>-- no result --</p>
+          )}
         </main>
       </header>
     </div>
