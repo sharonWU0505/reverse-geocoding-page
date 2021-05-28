@@ -86,7 +86,7 @@ function App() {
         <h1>經緯度地址轉換器</h1>
 
         <section className="action__bar">
-          <p>輸入經緯度時，經、緯之間需有空白相隔</p>
+          {/* <p>輸入經緯度時，經、緯之間需有空白相隔</p> */}
           <Button
             variant="contained"
             color="primary"
