@@ -86,7 +86,7 @@ function App() {
         <h1>經緯度地址轉換器</h1>
 
         <section className="action__bar">
-          {/* <p>輸入經緯度時，經、緯之間需有空白相隔</p> */}
+          <p>輸入經緯度時，經在前，緯在後，中間請空格</p>
           <Button
             variant="contained"
             color="primary"
@@ -107,7 +107,7 @@ function App() {
 
         <main className="transformer">
           <TextField
-            label="輸入經緯度，多筆請換行；經在前，緯在後，中間請空格"
+            label="輸入經緯度，多筆請換行"
             type="text"
             variant="outlined"
             value={inputs}
