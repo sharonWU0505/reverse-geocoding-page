@@ -102,7 +102,6 @@ function App() {
       let csv = "經,緯,地址\n"
       tableData.forEach(data => {
         const row = `${data.latlng.trim().split(" ").join(",")},${data.address}\n`;
-        console.log(row)
         csv += row;
       })
 
