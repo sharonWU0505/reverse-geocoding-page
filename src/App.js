@@ -98,12 +98,15 @@ function App() {
 
   const getDownloadCSVLinkProps = () => {
     if (tableData) {
-      console.log(tableData)
       const download = `ADDRESSES_${new Date().toLocaleString()}.csv`;
-      const csvContent = "data:text/csv;charset=utf-8," + 
-        "經,緯,地址\n" + 
-        `${tableData.map(data => `${data.latlng.split(" ").join(",")},${data.address}\n`)}`
-      const href = encodeURI(csvContent);
+      let csv = "經,緯,地址\n"
+      tableData.forEach(data => {
+        const row = `${data.latlng.trim().split(" ").join(",")},${data.address}\n`;
+        console.log(row)
+        csv += row;
+      })
+
+      const href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
 
       return {
         href,
