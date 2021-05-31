@@ -78,12 +78,32 @@ function App() {
     setTableData(null);
   };
 
-  const getDownloadLinkProps = () => {
+  // const getDownloadLinkProps = () => {
+  //   if (tableData) {
+  //     const data = { data: tableData };
+  //     const download = `ADDRESSES_${new Date().toLocaleString()}.json`;
+  //     const downloadData = JSON.stringify(data || {}, 0, 2);
+  //     const href = "data:application/json;charset=utf-8," + encodeURIComponent(downloadData);
+
+  //     return {
+  //       href,
+  //       download,
+  //     };
+  //   }
+
+  //   return {
+  //     href: "",
+  //   };
+  // };
+
+  const getDownloadCSVLinkProps = () => {
     if (tableData) {
-      const data = { data: tableData };
-      const download = `ADDRESSES_${new Date().toLocaleString()}.json`;
-      const downloadData = JSON.stringify(data || {}, 0, 2);
-      const href = "data:application/json;charset=utf-8," + encodeURIComponent(downloadData);
+      console.log(tableData)
+      const download = `ADDRESSES_${new Date().toLocaleString()}.csv`;
+      const csvContent = "data:text/csv;charset=utf-8," + 
+        "經,緯,地址\n" + 
+        `${tableData.map(data => `${data.latlng.split(" ").join(",")},${data.address}\n`)}`
+      const href = encodeURI(csvContent);
 
       return {
         href,
@@ -135,13 +155,13 @@ function App() {
 
           <h3>
             轉換結果
-            <a {...getDownloadLinkProps()} style={{ textDecoration: "none" }}>
+            <a {...getDownloadCSVLinkProps()} style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
                 color="primary"
                 style={{ marginLeft: "20px" }}
                 disabled={!tableData}>
-                下載
+                下載 CSV
               </Button>
             </a>
           </h3>
